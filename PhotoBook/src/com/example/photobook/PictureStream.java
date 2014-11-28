@@ -139,7 +139,7 @@ public class PictureStream extends Activity {
 		initialzeLoader();
 
 		// Check correct field of JSON Object
-		ImageLoader.getInstance().displayImage(imageUri.toString(), photoImageView);
+		ImageLoader.getInstance().displayImage(photoObject.getString("photoPath"), photoImageView);
 
 		imageStream.addView(photoImageView);
 
@@ -147,7 +147,7 @@ public class PictureStream extends Activity {
 		// which picture clicked
 		photoImageView.setOnClickListener(new View.OnClickListener() {
 
-			String photoPath = imageUri.toString();
+			String photoPath = photoObject.getString("photoPath");
 
 			@Override
 			public void onClick(View v) {
