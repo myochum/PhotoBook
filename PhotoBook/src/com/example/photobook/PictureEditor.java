@@ -69,28 +69,7 @@ public class PictureEditor extends Activity{
 		
 		
 		
-		/*Initialize image loader*/
-		ImageLoader imageLoader;
-		DisplayImageOptions displayOptions;
-		
-		imageLoader = ImageLoader.getInstance();
-		
-		displayOptions = new DisplayImageOptions.Builder()
-		.cacheInMemory(true)
-		.cacheOnDisc(true)
-		.bitmapConfig(Bitmap.Config.RGB_565)
-		.build();
-		
-		File cacheDir = StorageUtils.getCacheDirectory(this);
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-        .threadPoolSize(3)
-        .threadPriority(Thread.NORM_PRIORITY - 1)
-        .memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 * 1024)) // 2 MBs
-        .discCache(new UnlimitedDiscCache(cacheDir))
-        .discCacheSize(50 * 1024 * 1024) // 50 MBs
-        .defaultDisplayImageOptions(displayOptions)
-        .build();
-		ImageLoader.getInstance().init(config);
+		initialzeLoader();
 		
 		
 		/*Initialize caption field and layout*/
@@ -115,21 +94,7 @@ public class PictureEditor extends Activity{
 		layout.addView(photoView);
 	
 	
-	/*Clicks save to start service to fetch info and send to database*/
 	
-//	LocationManager to get GPS info
-//	LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-//	
-//	public void onLocationChanged(Location location){
-//		
-//		/*Get altitude*/
-//		 location.getAltitude();
-//		 
-//		 /*Get location*/
-//		 location.getLatitude();
-//		 location.getLongitude();
-//	}
-		
 	 
 	
 	}
@@ -160,5 +125,29 @@ public class PictureEditor extends Activity{
 	startActivity(returns);
 	}
 	
+	private void initialzeLoader(){
+		/*Initialize image loader*/
+		ImageLoader imageLoader;
+		DisplayImageOptions displayOptions;
+		
+		imageLoader = ImageLoader.getInstance();
+		
+		displayOptions = new DisplayImageOptions.Builder()
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.bitmapConfig(Bitmap.Config.RGB_565)
+		.build();
+		
+		File cacheDir = StorageUtils.getCacheDirectory(this);
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+        .threadPoolSize(3)
+        .threadPriority(Thread.NORM_PRIORITY - 1)
+        .memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 * 1024)) // 2 MBs
+        .discCache(new UnlimitedDiscCache(cacheDir))
+        .discCacheSize(50 * 1024 * 1024) // 50 MBs
+        .defaultDisplayImageOptions(displayOptions)
+        .build();
+		ImageLoader.getInstance().init(config);
+	}
 	
 }
